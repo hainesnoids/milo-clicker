@@ -18,15 +18,15 @@
   {
     "id": "ecat",
     "name": "Eggs Cheese and Turkey",
-    "description": "bigger bonus but bigger wait",
+    "description": "small bonus every time it hits a wall",
     "cost": 4388,
     "icon": "item.png",
     "redeemOnce": true
   },
   {
-    "id": "hellbeast",
-    "name": "Hellbeast",
-    "description": "unleash the hellbeast",
+    "id": "gus",
+    "name": "Gus",
+    "description": "DO NOT REDEEM",
     "icon": "item.png",
     "cost": 1000000,
     "redeemOnce": true
@@ -34,7 +34,7 @@
   {
     "id": "win",
     "name": "Reset",
-    "description": "Win the game",
+    "description": "redeeming this will <mark>instantly reset your save data</mark>.",
     "icon": "item.webp",
     "cost": 1000000000,
     "redeemOnce": true

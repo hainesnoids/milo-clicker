@@ -101,64 +101,87 @@ foo = {
         oilCooldown();
     },
     ecat() {
-        console.info("hi!");
-        const elm_crudeOilWidget = document.querySelector("#widgets > div.ecat");
-        const elm_crudeOilBase = document.querySelector("#widgets > div.ecat > div");
-        const elm_crudeOil = document.querySelector("#widgets > div.ecat .crude-oil");
-        const elm_crudeOilShadow = document.querySelector("#widgets > div.ecat .crude-oil-shadow");
-        const cooldown_max = 300;
-        let cooldown = cooldown_max;
-        elm_crudeOilWidget.classList.remove("hidden");
-        const keyframes = [
-            { height: "100%" },
-            { height: "0%" },
-        ]
-        const properties = {
-            duration: cooldown_max * 1000,
-            iterations: 1,
-            fill: "forwards"
-        };
-        function redeemOil() {
-            playAudio("money");
-            flow(10000);
-            oilCooldown();
-        }
-        function oilCooldown() {
-            elm_crudeOilShadow.animate(keyframes, properties);
-            cooldown = cooldown_max;
-            elm_crudeOilBase.style.cursor = "not-allowed";
-            elm_crudeOil.style.filter = "brightness(0.7)";
-            let e = setInterval(() => {
-                cooldown--;
-                if (cooldown === 0) {
-                    clearInterval(e);
-                    elm_crudeOilBase.style.cursor = "";
-                    elm_crudeOil.style.filter = "";
-                }
-            },1000)
-        }
-        elm_crudeOilBase.addEventListener("click", () => {
-            if (cooldown === 0) {
-                redeemOil();
+        let shape = document.createElement("div");
+        shape.classList.add("ecat-perspective-wrapper");
+        document.body.appendChild(shape);
+
+        let graphic = document.createElement("img");
+        graphic.classList.add("ecat");
+        graphic.src = "item-data/ecat/item.png";
+        graphic.alt = "Eggs Cheese and Turkey";
+        shape.appendChild(graphic);
+
+        let framerate = 60;
+        let posX = 2;
+        let posY = 2;
+        let speedInitX = 2;
+        let speedInitY = 1;
+        let speedX = 2;
+        let speedY = 1;
+        let ecatSfxIdx = 0;
+        function advanceColor() {
+            switch (ecatSfxIdx) {
+                case 0:
+                    playAudio("eggs");
+                    break
+                case 1:
+                    playAudio("cheese");
+                    break
+                case 2:
+                    playAudio("turkey");
+                    break
             }
-        });
-        oilCooldown();
-    },
-    async top_five_videos() {
-        const videoWrapper = document.querySelector(".top-five-videos");
-        const videoPlayer = document.querySelector(".top-five-videos-player");
-        const video = initVideo(videoPlayer);
-        video.addEventListener("ended", playNextVideo);
-        videoWrapper.classList.remove("hidden");
-        let videoIndex = 0;
-        const videos = await fetch("item-data/top_five_videos/playlist.json")
-            .then(async (r) => {return await r.json()}) ?? [];
-        function playNextVideo() {
-            videoIndex++;
-            videoIndex %= videos.length;
-            setVideoSource(videos[videoIndex], video);
+            flow(50);
+            ecatSfxIdx++;
+            ecatSfxIdx %= 3;
         }
-        setVideoSource(videos[0], video);
+        let safeColors = {
+            x: true,
+            y: true
+        };
+        function safeColor(direction, hit) {
+            if (hit) { // are we hitting a side
+                if (safeColors[direction]) { // is this the first time
+                    safeColors[direction] = false;
+                    advanceColor();
+                }
+            }
+            else { // we aren't hitting a side anymore
+                safeColors[direction] = true;
+            }
+        }
+        function bounce() {
+            posX += speedX;
+            posY += speedY;
+            let rect = shape.getBoundingClientRect();
+            let bodyRect = document.body.getBoundingClientRect();
+            if (rect.right >= bodyRect.width) {
+                speedX = speedInitX * -1;
+                safeColor('x', true);
+            }
+            else if (rect.left <= 0) {
+                speedX = speedInitX;
+                safeColor('x', true);
+            }
+            else {
+                safeColor('x', false);
+            }
+            if (rect.bottom >= bodyRect.height) {
+                speedY = speedInitY * -1;
+                safeColor('y', true);
+            }
+            else if (rect.top <= 0) {
+                speedY = speedInitY;
+                safeColor('y', true);
+            }
+            else {
+                safeColor('y', false);
+            }
+            shape.style.left = "".concat(posX, "px");
+            shape.style.top = "".concat(posY, "px");
+            setTimeout(bounce, 1000 / framerate);
+        }
+        bounce();
     },
     win() {
         creekflows = 0;
@@ -175,7 +198,11 @@ function load_items() {
     for (const [key, value] of Object.entries(purchasedItems)) {
         (async () => {
             for (let i = 0; i < value; i++) {
-                foo[key]();
+                try {
+                    foo[key]();
+                } catch(e) {
+                    console.warn(`item "${key}" was found in the save file but does not have a function associated with it.`)
+                }
                 await wait(50);
             }
         })()
@@ -219,8 +246,13 @@ function render_item(itm) {
             purchasedItems[id] ? purchasedItems[id]++ : purchasedItems[id] = 1;
             flow(itm["cost"]*-1);
             save_data();
-            console.log("loaded item " + id);
-            foo[id]();
+            try {
+                foo[id]();
+            } catch(e) {
+                console.error(`item "${id}" was just purchased but does not have a function associated with it.`)
+            } finally {
+                console.log("loaded item " + id);
+            }
             if (itm["redeemOnce"] === true) {
                 elm_li.classList.add("unlocked");
             } else {
