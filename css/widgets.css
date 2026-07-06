@@ -19,9 +19,6 @@
     color: #fff;
     transition: transform 1s linear;
 }
-#widgets > div.hidden {
-
-}
 .buttons {
     display: flex;
     justify-content: end;
