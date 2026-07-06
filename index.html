@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milo Clicker</title>
+    <!-- Metadata -->
+    <meta name="application-name" content="Milo Clicker">
+    <meta name="author" content="Milo Clicker">
+    <meta name="description" content="Milo Clicker">
+    <meta name="keywords" content="milo,kingsammelot,clicker,cookie clicker,samme">
+    <meta property="og:title" content="Milo Clicker">
+    <meta property="og:description" content="click milo so much your hand explodes (but you can still pet milo)">
+    <meta property="og:image" content="/img/creekflow.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="creekflow">
+    <meta name="twitter:description" content="creekflow">
+    <meta name="twitter:image" content="/img/creekflow.png">
+    <link rel="apple-touch-icon" href="/img/creekflow.png">
+    <meta name="theme-color" content="#9082ff">
+    <!-- Stylesheets -->
+    <style>
+        @import url("fonts/noto-sans/noto-sans.css");
+        * {
+            box-sizing: border-box;
+            position: relative;
+        }
+        body {
+            background: #9082ff;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+        }
+        #creekflow {
+            cursor: pointer;
+            width: 30vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(1);
+            user-select: none;
+            transition: transform .2s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        #creekflow:active {
+            transform: translate(-50%,-50%) scale(.9);
+        }
+        #items.hidden {
+            transform: translate(-100%,0);
+        }
+        #widgets > div.hidden {
+            transform: translate(110%,0);
+        }
+    </style>
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/items.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/video-js.css">
+</head>
+<body>
+    <img id="creekflow" src="img/creekflow.png" alt="Creekflow" draggable="false" onclick="creekflow()"/>
+    <div id="items" class="hidden">
+        <ul>
+        </ul>
+        <span id="count">10 Points</span>
+        <span id="power">1x Power</span>
+    </div>
+    <div id="widgets">
+        <div class="top-five-videos hidden">
+            <div class="top-five-videos-player">
+            </div>
+        </div>
+        <div class="ecat hidden">
+            <div>
+                <img class="crude-oil" src="item-data/ecat/item.png" alt="ECAT"/>
+                <div class="crude-oil-shadow"></div>
+            </div>
+        </div>
+        <div class="crudeoil hidden">
+            <div>
+                <img class="crude-oil" src="item-data/crude_oil/item.png" alt=""/>
+                <div class="crude-oil-shadow"></div>
+            </div>
+        </div>
+        <div class="music hidden">
+            <div class="inner-player">
+                <audio class="player"></audio>
+                <div>
+                    <div class="cover-art">
+                        <img class="track-cover" alt="Cover Art">
+                    </div>
+                </div>
+                <div>
+                    <div class="track-info">
+                        <span class="track-title">track title</span>
+                        <span class="track-artist">track artist</span>
+                    </div>
+                    <div class="track-timestamps">
+                        <span class="track-time">-:--</span>
+                        <span class="track-time-neg">--:--</span>
+                    </div>
+                    <div class="track-progress">
+                        <div class="track-progress-inner" style="width: 0"></div>
+                    </div>
+                    <div class="track-controls">
+                        <button class="playback-prev"><img src="item-data/album/icons/media-skip-backward.svg" alt="Previous"/></button>
+                        <button class="playback-pause"><img src="item-data/album/icons/media-playback-start.svg" alt="Play"/></button>
+                        <button class="playback-next"><img src="item-data/album/icons/media-skip-forward.svg" alt="Next"/></button>
+                        <label class="player-volume">
+                            <img src="item-data/album/icons/player-volume.svg" alt="Volume"/>
+                            <input type="range" min="0" max="100" value="50">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tooltip-container">
+        <div id="tooltip"></div>
+    </div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/video.min.js"></script>
+<script src="js/player.js"></script>
+<script src="js/items.js"></script>
+<script src="js/tooltip.js"></script>
+<script src="js/playerCore.js"></script>
+</html>
