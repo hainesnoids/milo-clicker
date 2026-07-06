@@ -32,8 +32,10 @@ function setVolumesForGroup(group) {
 }
 Object.entries(volumeSliders).forEach(([key, value]) => {
     const slider = document.querySelector("#volume-" + key);
-    if (!itemVolumes[key]) {
+    if (itemVolumes[key] == null) {
         itemVolumes[key] = value.default
+    } else {
+        slider.value = itemVolumes[key]*100;
     }
     setVolumesForGroup(key);
     slider.addEventListener("input", () => {

@@ -76,6 +76,7 @@
         </div>
         <div class="music hidden">
             <div class="inner-player">
+                <button class="stylized info anchor-top-right" onclick="alert('The music from this widget is the highest quality available, compressed to opus to save on file size. Try listening to these tracks with a subwoofer to see the difference.')"></button>
                 <audio class="player"></audio>
                 <div>
                     <div class="cover-art">
@@ -137,7 +138,10 @@
                     <option value="30"></option>
                 </datalist>
             </div>
-            <span>Game by <a target="_blank" href="//ws4k.net">maudpuzzie/hainesnoids</a></span>
+            <div class="setting">
+                <span>Game by</span>
+                <div><a target="_blank" href="//ws4k.net">maudpuzzie/hainesnoids</a></div>
+            </div>
         </div>
         <button sfx="true" onclick="settings.close()">Close</button>
     </dialog>
