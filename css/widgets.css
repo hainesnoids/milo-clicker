@@ -10,7 +10,7 @@
     justify-content: end;
     gap: 4px;
 }
-#widgets > div {
+#widgets > div:not(.buttons) {
     background: linear-gradient(0deg, #2a2a2a, #000);
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -22,6 +22,23 @@
 }
 #widgets > div.hidden {
 
+}
+.buttons {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    height: 34px;
+}
+button {
+    background: linear-gradient(180deg, #2a2a2a, #000);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px;
+    color: #fff;
+    cursor: var(--cursor-pointer), pointer;
+}
+button:active {
+    background: linear-gradient(0deg, #2a2a2a, #000);
 }
 
 
@@ -93,7 +110,7 @@
     user-select: none;
     color: #fff;
     padding: 3px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
 }
 .player-volume {
     flex: 1;
@@ -119,7 +136,7 @@
 .crudeoil > div {
     width: 200px;
     height: 200px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
 }
 .crudeoil.locked {
     cursor: not-allowed;
@@ -138,7 +155,7 @@
     opacity: 0.8;
 }
 .top-five-videos {
-    
+
 }
 .top-five-videos .video-js {
     width: 100%;

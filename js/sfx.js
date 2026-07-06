@@ -4,15 +4,6 @@ let sounds = {
     },
     'wolfkeerc': {
         vol: 0.1
-    },
-    'eggs': {
-        vol: 0.5
-    },
-    'cheese': {
-        vol: 0.5
-    },
-    'turkey': {
-        vol: 0.5
     }
 }
 
