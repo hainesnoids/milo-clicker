@@ -18,7 +18,6 @@
     user-select: none;
     color: #fff;
     transition: transform 1s linear;
-    transform: translate(0,0);
 }
 #widgets > div.hidden {
 
