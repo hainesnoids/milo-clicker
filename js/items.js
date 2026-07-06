@@ -131,7 +131,7 @@ foo = {
                     playAudio("turkey");
                     break
             }
-            flow(50);
+            flow(250);
             ecatSfxIdx++;
             ecatSfxIdx %= 3;
         }
