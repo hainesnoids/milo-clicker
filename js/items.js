@@ -183,6 +183,8 @@ foo = {
         }
         bounce();
     },
+    gus() {
+    },
     win() {
         creekflows = 0;
         purchasedItems = [];
