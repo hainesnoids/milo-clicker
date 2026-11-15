@@ -24,20 +24,11 @@
     "redeemOnce": true
   },
   {
-    "id": "gus",
-    "name": "Gus",
-    "description": "DO NOT REDEEM",
-    "icon": "item.png",
-    "cost": 1000000,
-    "redeemOnce": true
-  },
-  {
-    "id": "win",
-    "name": "Reset",
-    "description": "redeeming this will <mark>instantly reset your save data</mark>.",
-    "icon": "item.webp",
-    "cost": 1000000000,
-    "redeemOnce": true
+    "id": "rebirth",
+    "name": "Rebirth",
+    "description": "Start anew.",
+    "icon": "item.svg",
+    "cost": 1000000
   },
   {
     "id": "clicker1",

@@ -76,7 +76,7 @@ foo = {
         };
         function redeemOil() {
             playAudio("money");
-            flow(4000);
+            elow(4000 * oMult);
             oilCooldown();
         }
         function oilCooldown() {
@@ -131,7 +131,7 @@ foo = {
                     playAudio("turkey");
                     break
             }
-            flow(250);
+            elow(250 * eMult);
             ecatSfxIdx++;
             ecatSfxIdx %= 3;
         }
@@ -185,11 +185,11 @@ foo = {
     },
     gus() {
     },
-    win() {
-        creekflows = 0;
-        purchasedItems = [];
+    rebirth() {
         save_data();
-        location.reload();
+        playAudio("rebirth");
+        document.body.classList.add("rebirth");
+        setTimeout(() => {location.pathname = "/paths"},2000);
     }
 }
 
@@ -200,6 +200,7 @@ function load_items() {
     for (const [key, value] of Object.entries(purchasedItems)) {
         (async () => {
             for (let i = 0; i < value; i++) {
+                if (key === "rebirth") return // no refresh loop please :aga:
                 try {
                     foo[key]();
                 } catch(e) {
@@ -246,7 +247,7 @@ function render_item(itm) {
         if (creekflows >= itm["cost"] && !(itm["redeemOnce"] === true && Object.keys(purchasedItems).includes(id))) {
             playAudio("itemRedeem");
             purchasedItems[id] ? purchasedItems[id]++ : purchasedItems[id] = 1;
-            flow(itm["cost"]*-1);
+            elow(itm["cost"]*-1);
             save_data();
             try {
                 foo[id]();

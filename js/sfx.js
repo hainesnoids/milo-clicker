@@ -4,6 +4,9 @@ let sounds = {
     },
     'wolfkeerc': {
         vol: 0.1
+    },
+    'click': {
+        pitchVar: 2 // in semitones, for some reason
     }
 }
 
@@ -25,6 +28,9 @@ function playAudio(group) {
     const soundSource = lAC.aC.createBufferSource();
     soundSource.buffer = lAC.aB;
     soundSource.connect(gainNode);
+    if (group.pitchVar) {
+        soundSource.detune.value = (Math.random() * 2 - 1) * (group.pitchVar * 100);
+    }
     soundSource.start(0);
     return {soundSource, gainNode};
 }
@@ -49,7 +55,9 @@ loadAudio('creekflow', 'raw/creekflow.opus');
 loadAudio('itemRedeem', 'raw/click_fairytail.opus');
 loadAudio('stoneMove', 'raw/moving-stone.opus');
 loadAudio('wolfkeerc', 'raw/click.opus');
+loadAudio('click', 'raw/click2.opus');
 loadAudio('money', 'raw/money.opus');
 loadAudio('eggs', 'item-data/ecat/eggs.opus');
 loadAudio('cheese', 'item-data/ecat/cheese.opus');
 loadAudio('turkey', 'item-data/ecat/turkey.opus');
+loadAudio('rebirth', 'raw/rebirth.opus');
