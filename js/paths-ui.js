@@ -216,6 +216,7 @@ function soLetsSayYouCanGoHere(node) {
 
 function myDecisionIsFinal() {
     document.querySelector(".player").pause();
+    playAudio("paths-choose");
     localStorage.setItem("paths", JSON.stringify(unlockedPaths.concat(pathsToUnlock)));
     localStorage.setItem("pathStage", JSON.parse(localStorage.getItem("purchasedItems"))["rebirth"]); // anticheat measure, kick the user if these two numbers aren't equal in the future
     document.body.classList.add("final"); // literally all the animations are done through css, this is plentiful

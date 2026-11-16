@@ -8,11 +8,11 @@ const elm_items = document.querySelector("#items");
 
 // load data and determine if first visit
 function load_data() {
-    if (!localStorage.getItem("creekflows")) {first_visit(); return} // act normal on first visit
+    creekflows = Number(localStorage.getItem("creekflows"));
+    if (Number(localStorage.getItem("creekflows")) < 10) {first_visit(); return} // act normal on first visit
 
     state = "game";
     elm_items.classList.remove("hidden");
-    creekflows = Number(localStorage.getItem("creekflows"));
     elm_count.innerHTML = creekfill(creekflows);
 }
 
@@ -48,12 +48,12 @@ function geekfill(i) {
 
 // relative adjustment of creekflows
 function elow(i) {
-    creekflows+= i;
+    creekflows+= i * fMult;
     document.dispatchEvent(new CustomEvent("creekflow"));
     elm_count.innerHTML = creekfill(creekflows);
 }
 function flow(i) {
-    creekflows+= i * fMult;
+    creekflows+= i;
     document.dispatchEvent(new CustomEvent("creekflow"));
     elm_count.innerHTML = creekfill(creekflows);
 }
@@ -65,7 +65,7 @@ function glow(i) {
 
 // on click
 function creekflow() {
-    elow(mousePower);
+    flow(mousePower);
     switch (state) {
         case "first_visit":
             if (creekflows >= 10) {

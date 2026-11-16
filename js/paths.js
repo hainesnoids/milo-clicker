@@ -33,6 +33,30 @@ const paths = [
         "image": "item.svg"
     },
     {
+        "id": "clicker_3",
+        "parent": "clicker_1",
+        "cost": 5,
+        "name": "Clicker Upgrade 3",
+        "description": "Every simulated click is worth 4x.",
+        "image": "item.svg"
+    },
+    {
+        "id": "clicker_4",
+        "parent": "clicker_1",
+        "cost": 7,
+        "name": "Clicker Upgrade 4",
+        "description": "Every simulated click is worth 5x.",
+        "image": "item.svg"
+    },
+    {
+        "id": "clicker_5",
+        "parent": "clicker_4",
+        "cost": 10,
+        "name": "Clicker Upgrade 5",
+        "description": "Every simulated click is worth 10x.",
+        "image": "item.svg"
+    },
+    {
         "id": "breakfast_1",
         "parent": "root",
         "cost": 1,
@@ -51,9 +75,33 @@ const paths = [
     {
         "id": "mouse_2",
         "parent": "mouse_1",
-        "cost": 1,
+        "cost": 3,
         "name": "Mouse Upgrade 2",
-        "description": "Mouse clicks are worth double.",
+        "description": "Mouse clicks are worth triple.",
+        "image": "item.svg"
+    },
+    {
+        "id": "mouse_3",
+        "parent": "mouse_1",
+        "cost": 5,
+        "name": "Mouse Upgrade 3",
+        "description": "Mouse clicks are worth 4x.",
+        "image": "item.svg"
+    },
+    {
+        "id": "mouse_4",
+        "parent": "mouse_1",
+        "cost": 7,
+        "name": "Mouse Upgrade 4",
+        "description": "Mouse clicks are worth 5x.",
+        "image": "item.svg"
+    },
+    {
+        "id": "mouse_5",
+        "parent": "oil_1",
+        "cost": 10,
+        "name": "Mouse Upgrade 5",
+        "description": "Mouse clicks are worth 10x.",
         "image": "item.svg"
     }
 ];

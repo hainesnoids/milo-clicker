@@ -83,7 +83,7 @@
 <script>
     const a = Number(localStorage.getItem("pathStage"));
     const b = JSON.parse(localStorage.getItem("purchasedItems"))["rebirth"];
-    if (a+1 !== b) location.pathname = "/";
+    if (a+1 < b) location.pathname = "/";
 
     window.addEventListener("load", () => {
         document.body.classList.add("loaded");

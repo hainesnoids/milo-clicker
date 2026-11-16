@@ -109,7 +109,7 @@ body.final #paths li.glow {
     pointer-events: none;
 }
 #paths li.locked img {
-    filter: saturate(0) brightness(0.5);
+    filter: /*saturate(0) */brightness(0.3);
 }
 .item-title {
     margin-inline-end: 32px;

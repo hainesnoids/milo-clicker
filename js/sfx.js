@@ -61,3 +61,4 @@ loadAudio('eggs', 'item-data/ecat/eggs.opus');
 loadAudio('cheese', 'item-data/ecat/cheese.opus');
 loadAudio('turkey', 'item-data/ecat/turkey.opus');
 loadAudio('rebirth', 'raw/rebirth.opus');
+loadAudio('paths-choose', 'raw/paths-choose.opus');

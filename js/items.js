@@ -5,35 +5,35 @@ let purchasedItems = {};
 foo = {
     clicker1() {
         setInterval(() => {
-            flow(1);
+            elow(1);
             playAudio("wolfkeerc");
             save_data();
-        },1000);
+        },2000);
     },
     clicker2() {
         setInterval(() => {
-            flow(2);
+            elow(5);
             playAudio("wolfkeerc");
             save_data();
         },990);
     },
     clicker3() {
         setInterval(() => {
-            flow(4);
+            elow(10);
             playAudio("wolfkeerc");
             save_data();
         },980);
     },
     clicker4() {
         setInterval(() => {
-            flow(8);
+            elow(100);
             playAudio("wolfkeerc");
             save_data();
         },970);
     },
     clicker5() {
         setInterval(() => {
-            flow(16);
+            elow(500);
             playAudio("wolfkeerc");
             save_data();
         },960);
@@ -42,16 +42,16 @@ foo = {
         glow(1);
     },
     power2() {
-        glow(2);
+        glow(10);
     },
     power3() {
-        glow(4);
+        glow(100);
     },
     power4() {
-        glow(8);
+        glow(500);
     },
     power5() {
-        glow(16);
+        glow(2000);
     },
     album() {
         document.querySelector("#widgets > div.music").classList.remove("hidden");
@@ -76,7 +76,7 @@ foo = {
         };
         function redeemOil() {
             playAudio("money");
-            elow(4000 * oMult);
+            flow(4000 * oMult);
             oilCooldown();
         }
         function oilCooldown() {
@@ -131,7 +131,7 @@ foo = {
                     playAudio("turkey");
                     break
             }
-            elow(250 * eMult);
+            flow(250 * eMult);
             ecatSfxIdx++;
             ecatSfxIdx %= 3;
         }
@@ -244,10 +244,10 @@ function render_item(itm) {
     elm_count.innerHTML = !purchasedItems[id] || itm["redeemOnce"] ? "" : purchasedItems[id];
     elm_li.append(elm_title,elm_cost,elm_image,elm_count);
     elm_li.addEventListener("click",async () => {
-        if (creekflows >= itm["cost"] && !(itm["redeemOnce"] === true && Object.keys(purchasedItems).includes(id))) {
+        if (creekflows >= itm["cost"] && !((itm["redeemOnce"] === true || purchasedItems[id] >= itm["limit"]) && Object.keys(purchasedItems).includes(id))) {
             playAudio("itemRedeem");
             purchasedItems[id] ? purchasedItems[id]++ : purchasedItems[id] = 1;
-            elow(itm["cost"]*-1);
+            flow(itm["cost"]*-1);
             save_data();
             try {
                 foo[id]();
@@ -261,11 +261,15 @@ function render_item(itm) {
             } else {
                 elm_count.innerHTML = purchasedItems[id];
             }
+            if (purchasedItems[id] >= itm["limit"]) {
+                elm_li.classList.add("unlocked");
+                elm_count.innerHTML = purchasedItems[id];
+            }
         }
     });
     if (creekflows < itm["cost"]) {
         elm_li.classList.add("locked");
-    } else if (itm["redeemOnce"] === true && Object.keys(purchasedItems).includes(id)) {
+    } else if ((itm["redeemOnce"] === true || purchasedItems[id] >= itm["limit"]) && Object.keys(purchasedItems).includes(id)) {
         elm_li.classList.add("unlocked");
     }
     document.addEventListener("creekflow", () => {
