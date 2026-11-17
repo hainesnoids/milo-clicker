@@ -5,6 +5,9 @@ let sounds = {
     'wolfkeerc': {
         vol: 0.1
     },
+    'paths-choose': {
+        vol: 0.5
+    },
     'click': {
         pitchVar: 2 // in semitones, for some reason
     }
